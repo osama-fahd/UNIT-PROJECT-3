@@ -1,0 +1,19 @@
+body {
+    /* font-family: "Faculty Glyphic", serif;
+    font-weight: 400;
+    font-style: normal; */
+
+    /* background-color: #EDF4F2; */
+}
+
+a {
+    text-decoration: none;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+h1, h2 {
+    word-spacing: 6px;
+}
