@@ -1,9 +1,6 @@
 body {
-    /* font-family: "Faculty Glyphic", serif;
-    font-weight: 400;
-    font-style: normal; */
 
-    /* background-color: #EDF4F2; */
+    background-color: #e8ddaf;
 }
 
 a {
@@ -11,9 +8,27 @@ a {
 }
 
 h1 {
-    font-size: 3rem;
+    font-size: 4rem;
+    color: #ffce47;
 }
 
 h1, h2 {
     word-spacing: 6px;
+}
+
+main {
+    min-height: 100vh;
+    background-image: url('/static/images/gym-equipment.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* padding-top: 0.5rem; */
+}
+
+main {
+    color: #fcd15c;
+}
+
+footer a{
+    color: black;
 }

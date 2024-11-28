@@ -24,10 +24,10 @@
     <title>{% block title %} {% endblock %}</title>
 </head>
 <body>
-    <div class="container-fluid sticky-top pt-4 pb-4">
+    <div class="container-fluid sticky-top pt-3">
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/"><h2>Fitness Tracker</h2></a>
+                <a class="navbar-brand" href="/"><h2>FitnessTracker</h2></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -40,26 +40,24 @@
                     <li class="nav-item">
                         <a {% if request.path == contact_url %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{{contact_url}}">Contact Us</a>
                     </li>
+
                     <li class="nav-item">
-                      {% if request.user.is_authenticated %}
-                        <div class="d-flex gap-1 align-items-center">
-                          <a  class="nav-link" href="{% url 'accounts:log_out' %}?next={{request.path}}">Log out</a>
-                        </div>
-                      {% else %}
-                        <div class="dropdown bg-transparent">
-                          <a class="btn nav-link dropdown-toggle p-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sign up/ Sign in
-                          </a>
-                          <ul class="dropdown-menu p-3">
-                            <li><a class="dropdown-item" href="{% url 'accounts:sign_up' %}">Sign up</a></li>
-                            <li><a class="dropdown-item" href="{% url 'accounts:sign_in' %}?next={{request.path}}">Sign in</a></li>
-                          </ul>
-                        </div>
-                      {% endif %}
+                      <a class="nav-link" href="{% url 'accounts:log_out' %}?next={{request.path}}">Log Out</a>
                     </li>
+
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sign up/ Sign in
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="{% url 'accounts:sign_up' %}">Sign Up</a></li>
+                        <li><a class="dropdown-item" href="{% url 'accounts:sign_in' %}?next={{request.path}}">Sign In</a></li>
+                      </ul>
+                    </li>
+
                   </ul>
                   <form class="d-flex" role="search" method="get" action="">
-                    <input  class="form-control me-2" type="search" placeholder="Search For Car" aria-label="Search" name="search" value="{{request.GET.search}}" required minlength="3">
+                    <input  class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{request.GET.search}}" required minlength="3">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                   </form>
                 </div>
@@ -69,7 +67,7 @@
 
 
 
-    <main>
+    <main class="p-5">
       {% if messages %}
         {% for message in messages %}
           <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
@@ -84,8 +82,8 @@
     {% endblock %}
     </main>
     
-    <footer class="pt-5">
-        <hr/>
+    <footer class="p-4">
+        <!-- <hr class="m-0"/> -->
         <section class="d-flex flex-column justify-content-center align-items-center gap-2">
             <a href="{% url 'main:contact_view' %}">
                 <h2 class="text-center">CONTACT US</h2>
