@@ -17,7 +17,7 @@ class Exercise(models.Model):
         FLEXIBILITY = 'flexibility', 'Flexibility'
         
     name = models.CharField(max_length=256)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     image = models.ImageField(upload_to="media/images/exercises/")
     video_link = models.URLField(blank=True)
     video = models.FileField(upload_to="media/videos/", blank=True)

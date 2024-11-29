@@ -33,12 +33,17 @@
                 </button>
 
                 {% url 'main:contact_view' as contact_url %}
+                {% url 'routines:new_routine_view' as new_routine %}
                 
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a {% if request.path == contact_url %} class="nav-link active" {% else %} class="nav-link" {% endif %} href="{{contact_url}}">Contact Us</a>
+                        <a {% if request.path == contact_url %} class="nav-link text-warning bg-dark rounded-5 ps-sm-5" {% else %} class="nav-link" {% endif %} href="{{contact_url}}">Contact Us</a>
+                    </li>
+
+                    <li class="nav-item">
+                      <a {% if request.path == new_routine %} class="nav-link text-warning bg-dark rounded-5 ps-sm-5" {% else %} class="nav-link" {% endif %} href="{{new_routine}}">New Routine</a>
                     </li>
 
                     <li class="nav-item">
