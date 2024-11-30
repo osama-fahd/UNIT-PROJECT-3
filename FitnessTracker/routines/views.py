@@ -39,19 +39,39 @@ def routine_detail_view(request:HttpRequest, routine_id:int):
 
 
 def new_routine_view(request:HttpRequest):
-    routine_form = RoutineForm()
+    # if request.GET.get('exercise_id'):
+    #     exercise_id = request.GET.get('exercise_id')
+    #     exercise_id = int(exercise_id)
+    #     chosen_exercise = Exercise.objects.get(pk=exercise_id)
+    #     chosen_routine = request.GET.get('routine_name')
+    # else:
+    #     chosen_exercise = ''
+    #     chosen_routine = ''
     
-    if request.method == "POST":
-        routine_form = RoutineForm(request.POST)
-        if routine_form.is_valid():
-            routine_form.save()
-            messages.success(request, "Added Routine Successfully!", "alert-success")
-            return redirect("main:home_view")
-        else:
-            print("not valid form", routine_form.errors)
-            messages.error(request, "Couldn't Add Routine!", "alert-danger")
-    
-    return render(request, "routines/new_routine.html")
+    if request.method == 'POST':
+        name = request.POST['name']
+        routine = Routine.objects.create(name=name)
+
+        exercises = request.POST.getlist('exercise[]')
+        notes = request.POST.getlist('note[]')
+        rest_times = request.POST.getlist('restTime[]')
+
+        for exercise_id, note, rest_time in zip(exercises, notes, rest_times):
+            exercise = Exercise.objects.get(id=exercise_id)
+            Workout.objects.create(
+                routine=routine,
+                exercise=exercise,
+                note=note,
+                restTime=int(rest_time) if rest_time else None
+            )
+
+        return redirect('routines:routine_list')
+
+    exercises = Exercise.objects.all()
+    return render(request, 'routines/new_routine.html', {'exercises': exercises,
+                                                        #  'chosen_routine': chosen_routine,
+                                                        #  'chosen_exercise': chosen_exercise
+                                                         })
 
 
 def update_routine_view(request:HttpRequest, routine_id:int):

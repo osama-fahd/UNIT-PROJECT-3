@@ -17,12 +17,12 @@ def new_workout_view(request:HttpRequest):
         if workout_form.is_valid():
             workout_form.save()
             messages.success(request, "Added Workout Successfuly!", "alert-success")
-            return redirect("main:home_view")
+            # return redirect("routines:new_routine_view")
         else:
             print("not valid form", workout_form.errors)
             messages.error(request, "Couldn't Add Workout!", "alert-danger")
     
-    return render(request, "workouts/new_workout.html")
+    return render(request, "routines/new_routine.html")
 
 
 def update_workout_view(request:HttpRequest, workout_id:int):

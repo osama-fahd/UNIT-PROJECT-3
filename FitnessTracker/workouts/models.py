@@ -5,7 +5,7 @@ from routines.models import Routine
 
 class Workout(models.Model):
     routine = models.ForeignKey(Routine, on_delete=models.CASCADE)
-    exercise = models.OneToOneField(Exercise, on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     note = models.TextField(blank=True)
     restTime = models.PositiveIntegerField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

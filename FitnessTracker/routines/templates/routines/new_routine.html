@@ -6,13 +6,62 @@
 
 {% load static %}
 
-<h1 class="d-flex flex-column justify-content-lg-start align-items-lg-start justify-content-sm-center align-items-sm-center">
-    Creat New Workouts Routine
-</h1>
+<div class="d-flex flex-column justify-content-center align-items-center justify-content-lg-start align-items-lg-start">
+    <h1 class="align-self-center align-self-lg-start mb-5">
+        Create New Workouts Routine
+    </h1> 
 
+    <div class="row justify-content-center justify-content-lg-start w-100">
+        <div class="col-12 col-sm-10 col-lg-5">
+            <form class="d-flex flex-column gap-4" action="{% url 'routines:new_routine_view' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
 
+                <div class="d-flex flex-column gap-1" style="width: 100%;">
+                    <h2 class="">Routine Title</h2>
+                    <input type="text" name="name" placeholder="e.g., Chest Day" class="form-control" required/>
+                </div>
+                <div>
+                    <h3>Add Workout</h3>
+                    <div class="d-flex flex-column gap-3 border p-3 rounded">
+                        
+                        
+                        <div class="d-flex flex-column gap-1">
+                            <label for="exercise">Select Exercise To Workout On</label>
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle w-100" type="button" id="exerciseDropdown" data-bs-toggle="dropdown">
+                                    Select Exercise
+                                </button>
+                                <ul class="dropdown-menu w-100" aria-labelledby="exerciseDropdown" style="max-height: 300px; overflow-y: auto;">
+                                    {% for exercise in exercises %} 
+                                        <li>
+                                            <input type="radio" name="exercise" id="exercise_{{ exercise.id }}" value="{{ exercise.id }}" class="d-none" required>
+                                            <label for="exercise_{{ exercise.id }}" class="dropdown-item d-flex align-items-center gap-3">
+                                                <img src="{{ exercise.image.url }}" class="rounded" style="width: 100px; height: 100px; object-fit: cover;">
+                                                {{ exercise.name }}
+                                            </label>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+    
+                        <div class="d-flex flex-column gap-1">
+                            <label for="note">Workout Note <span class="text-secondary">(optional)</span></label>
+                            <textarea name="note" id="note" placeholder="" class="form-control"></textarea>
+                        </div>
+    
+                        <div class="d-flex flex-column gap-1">
+                            <label for="restTime">Rest Time (in seconds)</label>
+                            <input type="number" name="restTime" id="restTime" placeholder="e.g., 30s" class="form-control" required/>
+                        </div>
+                    </div>
+                </div>
 
-<!-- <div class="line mt-5"></div> -->
-
+                <!-- Submit Button -->
+                <input type="submit" value="Submit" class="btn form-control" style="background-color: #fcd15c; color: black"/>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
