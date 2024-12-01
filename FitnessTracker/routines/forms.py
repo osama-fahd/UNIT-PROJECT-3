@@ -5,5 +5,5 @@ from .models import Routine
 class RoutineForm(forms.ModelForm):
     class Meta:
         model = Routine
-        fields = "__all__"
+        fields = ['name']
     

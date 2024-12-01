@@ -1,6 +1,6 @@
 body {
 
-    background-color: #e8ddaf;
+    background-color: #ffce47cb;
 }
 
 a {
@@ -33,16 +33,30 @@ footer a{
     color: black;
 }
 
-
-.form-check-label img {
-    margin-right: 10px;
-    border: 1px solid #ddd;
-}
-
 .dropdown-item img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
+}
+
+.transparent-bg {
+    background-color: rgba(83, 83, 83, 0.3); 
+    border-radius: 8px;
+    padding: 20px; 
+    backdrop-filter: blur(2px); 
+}
+
+.table {
+    border-radius: 0.5rem; 
+    overflow: hidden;
+}
+
+.label-bg {
+    background-color: #ffce4790; 
+    border-radius: 8px;
+    padding: 10px; 
+    margin: 10px;
+    backdrop-filter: blur(2px); 
 }

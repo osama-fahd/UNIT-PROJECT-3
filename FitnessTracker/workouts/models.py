@@ -9,9 +9,15 @@ class Workout(models.Model):
     note = models.TextField(blank=True)
     restTime = models.PositiveIntegerField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self) -> str:
+        return f'{self.routine.name}-{self.exercise.name}'
 
 class Set(models.Model):
     weight = models.FloatField()
     repetition = models.PositiveIntegerField()
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f'{self.workout.routine.name}-{self.workout.exercise.name} set: {self.id}'

@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block title %} All Routines {% endblock %}
+
+{% block content %}
+
+{% load static %}
+
+<div class="d-flex flex-column justify-content-center align-items-center justify-content-lg-start align-items-lg-start">
+   <h1 class="align-self-center align-self-lg-start">
+        Your All Routines
+    </h1> 
+</div>
+
+
+{% include 'routines/routine_list.html' %}
+
+
+<!-- <div class="line mt-5"></div> -->
+
+
+{% endblock %}

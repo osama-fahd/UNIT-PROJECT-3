@@ -4,7 +4,6 @@ from django.http import HttpRequest, HttpResponse
 from .forms import RoutineForm
 from .models import Routine
 
-from workouts.forms import WorkoutForm, SetForm
 from workouts.models import Workout, Set
 
 from exercises.models import Exercise
@@ -12,6 +11,8 @@ from exercises.models import Exercise
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
+
+from django.db import IntegrityError, transaction
 
 
 
@@ -39,39 +40,20 @@ def routine_detail_view(request:HttpRequest, routine_id:int):
 
 
 def new_routine_view(request:HttpRequest):
-    # if request.GET.get('exercise_id'):
-    #     exercise_id = request.GET.get('exercise_id')
-    #     exercise_id = int(exercise_id)
-    #     chosen_exercise = Exercise.objects.get(pk=exercise_id)
-    #     chosen_routine = request.GET.get('routine_name')
-    # else:
-    #     chosen_exercise = ''
-    #     chosen_routine = ''
+    routine_form = RoutineForm()
     
-    if request.method == 'POST':
-        name = request.POST['name']
-        routine = Routine.objects.create(name=name)
-
-        exercises = request.POST.getlist('exercise[]')
-        notes = request.POST.getlist('note[]')
-        rest_times = request.POST.getlist('restTime[]')
-
-        for exercise_id, note, rest_time in zip(exercises, notes, rest_times):
-            exercise = Exercise.objects.get(id=exercise_id)
-            Workout.objects.create(
-                routine=routine,
-                exercise=exercise,
-                note=note,
-                restTime=int(rest_time) if rest_time else None
-            )
-
-        return redirect('routines:routine_list')
-
-    exercises = Exercise.objects.all()
-    return render(request, 'routines/new_routine.html', {'exercises': exercises,
-                                                        #  'chosen_routine': chosen_routine,
-                                                        #  'chosen_exercise': chosen_exercise
-                                                         })
+    if request.method == "POST":
+        routine_form = RoutineForm(request.POST)
+        if routine_form.is_valid():
+            with transaction.atomic():
+                routine = routine_form.save()
+                messages.success(request, "Continue To Add Your Workouts!", "alert-success")
+                return redirect("workouts:new_workout_view", routine.id)
+        else:
+            print("not valid form", routine_form.errors)
+            messages.error(request, "Couldn't Able To Add The title!", "alert-danger")
+    
+    return render(request, "routines/new_routine.html", {"routine_form": routine_form})
 
 
 def update_routine_view(request:HttpRequest, routine_id:int):

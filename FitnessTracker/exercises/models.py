@@ -42,3 +42,6 @@ class Exercise(models.Model):
 class Step(models.Model):
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     instruction = models.TextField()
+    
+    def __str__(self) -> str:
+        return f'{self.exercise.name}- step: {self.id}'
