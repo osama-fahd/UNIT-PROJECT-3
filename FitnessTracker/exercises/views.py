@@ -4,14 +4,24 @@ from django.http import HttpRequest, HttpResponse
 from .models import Exercise
 from .forms import ExerciseForm
 
+from django.contrib import messages
+from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+
+from django.db import IntegrityError, transaction
 
 from django.contrib import messages
 
 
 def all_exercises_view(request:HttpRequest):
     exercises = Exercise.objects.all()
+    workout_categories = Exercise.WorkoutCategory.choices
     
-    return render(request, "exercises/all_exercises.html", {'exercises': exercises})
+    page_number = request.GET.get("page", 1)
+    paginator = Paginator(exercises, 4)
+    exercises_page = paginator.get_page(page_number)
+    
+    return render(request, "exercises/all_exercises.html", {'exercises': exercises_page, 'workout_categories': workout_categories})
 
 
 def exercise_detail_view(request:HttpRequest, exercise_id:int):
@@ -64,14 +74,26 @@ def delete_exercise_view(request:HttpRequest,  exercise_id:int):
 
 
 def search_exercises_view(request:HttpRequest):
-    if "search" in request.GET and len(request.GET["search"]) >= 3:
-        exercises = Exercise.objects.filter(name__contains=request.GET["search"])
+    workout_categories = Exercise.WorkoutCategory.choices
+    exercises = Exercise.objects.all()  
+
+    filter_by = None
     
-    else:
+    if "search" in request.GET and len(request.GET["search"]) >= 3:
+        exercises = Exercise.objects.filter(name__icontains=request.GET["search"])
+    
+            
+    if "filter_workout_category" in request.GET and request.GET["filter_workout_category"] != '':
+        exercises = exercises.filter(workout_category=request.GET['filter_workout_category'])
+        filter_by = request.GET['filter_workout_category']
+    
+    if not exercises.exists():
         messages.error(request, "Couldn't Find Exercise!", "alert-danger")
         exercises = []
     
-    return render(request, "exercises/exercise_search.html", {'exercises': exercises,})
+    return render(request, "exercises/exercise_search.html", {'exercises': exercises, 
+                                                              'workout_categories': workout_categories, 
+                                                              'filter_by':filter_by})
 
     
     

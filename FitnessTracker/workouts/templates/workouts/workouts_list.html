@@ -3,13 +3,13 @@
     <div class="row mt-2 row-cols-1 row-cols-sm-1 row-cols-lg-2 g-5">
         {% for workout in routine.workout_set.all %}
             <div class="col">
-                <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 gap-2 routine_card workout_card">
+                <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 gap-2 routine_card">
                     <div class="d-flex justify-content-between align-items-center w-100">
                         
                         <div class="d-flex justify-content-start align-items-center gap-3 w-100">
                             <img src="{{workout.exercise.image.url}}" class="rounded-circle overflow-hidden" style="width: 80px; height: 80px; object-fit: cover;"/>
                             <a href="{% url 'exercises:exercise_detail_view' workout.exercise.id %}">
-                                <h2>{{workout.exercise}} </h2>
+                                <h2>{{workout.exercise.name}} </h2>
                             </a>
                         </div>
 

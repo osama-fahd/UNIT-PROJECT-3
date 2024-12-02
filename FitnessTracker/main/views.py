@@ -6,14 +6,16 @@ from datetime import datetime
 from .forms import ContactForm
 
 from routines.models import Routine
+from exercises.models import Exercise, Step
 
 from django.contrib import messages
 
 
 def home_view(request:HttpRequest):
-    routines = Routine.objects.all()
+    routines = Routine.objects.all()[0:3]
+    exercises = Exercise.objects.all()[0:4]
 
-    return render(request, 'main/home.html', {'routines': routines})
+    return render(request, 'main/home.html', {'routines': routines, 'exercises': exercises})
 
 def contact_view(request:HttpRequest):
     contact_form = ContactForm()

@@ -20,7 +20,7 @@ main {
     min-height: 100vh;
     background-image: url('/static/images/gym-equipment.jpg');
     background-size: cover;
-    background-position: center;
+    background-position:center;
     background-repeat: no-repeat;
     /* padding-top: 0.5rem; */
 }
@@ -106,5 +106,26 @@ footer a{
 
 .routine_card {
     color: #ffde82;
+}
+
+.exercise_card {
+    background-color: rgba(83, 83, 83, 0.143); 
+    backdrop-filter: blur(4px); 
+    transition: border 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, background-color 0.3 ease-in-out;
+}
+
+.exercise_card:hover {
+    background-color: rgba(102, 102, 102, 0.3); 
+    backdrop-filter: blur(2px); 
+}
+
+@media (max-width: 992px) {
+
+    main {
+        background-size: contain;
+        background-repeat:repeat-y;
+    }
+
+
 }
 

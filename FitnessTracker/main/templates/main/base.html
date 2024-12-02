@@ -37,11 +37,17 @@
                 {% url 'main:contact_view' as contact_url %}
                 {% url 'routines:new_routine_view' as new_routine %}
                 {% url 'routines:all_routines_view' as all_routines %}
-                
+                {% url 'exercises:all_exercises_view' as all_exercises %}
+
+      
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               
+                    <li class="nav-item">
+                      <a {% if request.path == all_exercises %} class="nav-link text-warning bg-dark rounded-5 ps-sm-5 ps-lg-2" {% else %} class="nav-link" {% endif %} href="{{all_exercises}}">All Exercises</a>
+                    </li>
+
                     <li class="nav-item">
                       <a {% if request.path == all_routines %} class="nav-link text-warning bg-dark rounded-5 ps-sm-5 ps-lg-2" {% else %} class="nav-link" {% endif %} href="{{all_routines}}">Your All Routines</a>
                     </li>

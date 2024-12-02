@@ -14,11 +14,22 @@
     </div>
     
     
-    {% include 'routines/routine_list.html' %}
+    {% include 'routines/routines_list.html' %}
 </div>
     
 
-<div class="line mt-5"></div>
+<div class="line mt-5 mb-5"></div>
+
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column align-items-center">
+        <h1>
+            Top Exercises
+         </h1> 
+    </div>
+    
+    {% include 'exercises/exercises_list.html' %}    
+
+</div>
 
 
 {% endblock %}

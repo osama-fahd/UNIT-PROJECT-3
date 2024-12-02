@@ -7,9 +7,8 @@ class Exercise(models.Model):
         BOTH_WORKOUTS = 'both', 'Home and Club Workouts'
         
     class EquipmentCategory(models.TextChoices):
-        NO_EQUIPMENT = 'none', 'No Equipment'
+        NO_EQUIPMENT = 'none', 'No Machine'
         MACHINE = 'machine', 'Machine'
-        BOTH = 'both', 'Both'
         
     class ExerciseCategory(models.TextChoices):
         STRENGTH = 'strength', 'Strength'
@@ -26,13 +25,13 @@ class Exercise(models.Model):
         max_length=30,
         choices=WorkoutCategory.choices
     )
-    exercise_category = models.CharField(
-        max_length=30,
-        choices=ExerciseCategory.choices
-    )
     equipment_category = models.CharField(
         max_length=30,
         choices=EquipmentCategory.choices
+    )
+    exercise_category = models.CharField(
+        max_length=30,
+        choices=ExerciseCategory.choices
     )
 
 
@@ -44,4 +43,4 @@ class Step(models.Model):
     instruction = models.TextField()
     
     def __str__(self) -> str:
-        return f'{self.exercise.name}- step: {self.id}'
+        return f'{self.exercise.name}- step id: {self.id}'
