@@ -24,7 +24,7 @@ class Set(models.Model):
         return f'{self.workout.routine.name}-{self.workout.exercise.name} set: {self.id}'
      
      
-class Check(models.Model):
+class Done(models.Model):
 
-    set = models.OneToOneField(Set, on_delete=models.CASCADE, related_name='check')
+    set = models.OneToOneField(Set, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)

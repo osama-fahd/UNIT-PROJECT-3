@@ -10,8 +10,9 @@ urlpatterns = [
     path("delete/<workout_id>/", views.delete_workout_view, name="delete_workout_view"),
     
     path("sets/new/<workout_id>", views.new_set_view, name="new_set_view"),
-    path("sets/update/<workout_id>/<set_id>/", views.update_set_view, name="update_set_view"),
-    path("sets/delete/<workout_id>/<set_id>/", views.delete_set_view, name="delete_set_view"),
-    
+    path("sets/update/<set_id>/", views.update_set_view, name="update_set_view"),
+    path("sets/delete/<set_id>/", views.delete_set_view, name="delete_set_view"),
+    path("checks/add/<set_id>/", views.done_set_view, name="done_set_view"),
+    path("checks/finsh/<workout_id>/", views.finish_workout_view, name="finish_workout_view"),
     path("search/workouts/", views.search_workouts_view, name="search_workouts_view"),
 ]

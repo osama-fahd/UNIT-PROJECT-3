@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Exercise
+from .models import Exercise, Step
 
-# Register your models here.
 admin.site.register(Exercise)
+
+admin.site.register(Step)

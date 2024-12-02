@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from .forms import RoutineForm
 from .models import Routine
 
-from workouts.models import Workout, Set, Check
+from workouts.models import Workout, Set, Done
 
 from exercises.models import Exercise
 
@@ -36,7 +36,7 @@ def all_routines_view(request:HttpRequest):
 def routine_detail_view(request:HttpRequest, routine_id:int):
     routine = Routine.objects.get(pk=routine_id)
     
-    checks = Check.objects.all()
+    checks = Done.objects.all()
     
     return render(request, "routines/routine_details.html", {'routine': routine, 'checks': checks})
 
