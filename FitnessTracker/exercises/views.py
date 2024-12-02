@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 
-from .models import Exercise
+from .models import Exercise, Step
 from .forms import ExerciseForm
 
 from django.contrib import messages
@@ -30,43 +30,52 @@ def exercise_detail_view(request:HttpRequest, exercise_id:int):
 
 
 def new_exercise_view(request:HttpRequest):
+
     if not request.user.is_staff:
         messages.success(request, "Only staff can add exercises!", "alert-warning")
         return redirect("main:home_view")
-    
-    exercise_form = ExerciseForm()
-    
-    if request.method == "POST":
-        exercise_form = ExerciseForm(request.POST, request.FILES)
-        if exercise_form.is_valid():
-            exercise_form.save()
-            messages.success(request, "Added Exercise Successfuly!", "alert-success")
-            return redirect("main:home_view")
-        else:
-            print("not valid form", exercise_form.errors)
-            messages.error(request, "Couldn't Add Exercise!", "alert-danger")
-    
-    return render(request, "exercises/new_exercise.html")
+
+    if request.method == 'POST':
+        exercise = Exercise.objects.create(
+            name=request.POST['name'],
+            description=request.POST.get('description', ''),
+            image=request.FILES.get('image'),
+            video_link=request.POST.get('video_link', ''),
+            video=request.FILES.get('video'),
+            workout_category=request.POST['workout_category'],
+            equipment_category=request.POST['equipment_category'],
+            exercise_category=request.POST['exercise_category'],
+        )
+
+        exercise.save()
+        messages.success(request, "Exercise added!", "alert-warning")
+        return redirect('exercises:all_exercises_view')  
+
+    return render(request, 'exercises/new_exercise.html')
+
+
+def new_instruction_view(request:HttpRequest, exercise_id:int):
+
+    if not request.user.is_staff:
+        messages.success(request, "Only staff can add instructions!", "alert-warning")
+        return redirect("main:home_view")
+
+    if request.method == 'POST':
+        exercise = Exercise.objects.get(pk=exercise_id)
+        instruction = Step.objects.create(
+            exercise=exercise,
+            instruction=request.POST['instruction']
+        )
+
+        instruction.save()
+        messages.success(request, "instruction added!", "alert-warning")  
+
+    return redirect('exercises:exercise_detail_view',exercise_id=exercise_id)
 
 
 def update_exercise_view(request:HttpRequest, exercise_id:int):
-    if not request.user.is_staff:
-        messages.success(request, "Only staff can update exercises!", "alert-warning")
-        return redirect("main:home_view")
-    
-    exercise = Exercise.objects.get(pk=exercise_id)
-    
-    if request.method == "POST":
-        exercise_form = ExerciseForm(instance=exercise, data=request.POST, files=request.FILES)
-        if exercise_form.is_valid():
-            exercise_form.save()
-            messages.success(request, "Updated Exercise Successfuly!", "alert-success")
-            return redirect("exercises:exercise_detail_view")
-        else:
-            print("not valid form", exercise_form.errors)
-            messages.error(request, "Couldn't Update Exercise!", "alert-danger")
-    
-    return render(request, "exercises/update_exercise.html")
+
+    pass
 
 def delete_exercise_view(request:HttpRequest,  exercise_id:int):
     if not request.user.is_staff:

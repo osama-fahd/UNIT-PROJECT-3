@@ -2,12 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from exercises.models import Exercise
 from routines.models import Routine
+from django.utils import timezone
 
 class Workout(models.Model):
     routine = models.ForeignKey(Routine, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
     note = models.TextField(blank=True)
     restTime = models.PositiveIntegerField(blank=True)
+    start_time = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     
     def __str__(self) -> str:

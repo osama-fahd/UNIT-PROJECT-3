@@ -7,10 +7,19 @@
 {% load static %}
 
 <div class="d-flex flex-column justify-content-center align-items-center">
-    <div class="d-flex flex-column align-items-center">
+    <div class="transparent-bg d-flex flex-column flex-lg-row justify-content-center align-items-center justify-content-lg-between align-items-lg-center gap-sm-2 gap-md-3 col-lg-8">
         <h1>
             All {{request.user.first_name}} Routines
-         </h1> 
+        </h1>
+
+        <form class="d-flex" role="search" method="get" action="{% url 'routines:search_routines_view' %}">
+            <div class="d-flex flex-row justify-content-center align-items-center gap-3">
+                <input  class="form-control me-2" type="search" placeholder="Search For Routine" aria-label="Search" name="search"  required minlength="3">
+
+
+                <input type="submit" value="search" class="btn btn-outline-success"/>
+            </div>
+        </form>
     </div>
     
     {% include 'routines/routines_list.html' %}

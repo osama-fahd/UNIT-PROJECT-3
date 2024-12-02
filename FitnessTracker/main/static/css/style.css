@@ -22,7 +22,6 @@ main {
     background-size: cover;
     background-position:center;
     background-repeat: no-repeat;
-    /* padding-top: 0.5rem; */
 }
 
 main {
@@ -37,13 +36,6 @@ footer a{
     color: black;
 }
 
-/* .dropdown-item img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
-    object-fit: cover;
-} */
 
 .transparent-bg {
     background-color: rgba(83, 83, 83, 0.3); 

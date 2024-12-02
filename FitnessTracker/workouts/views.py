@@ -59,18 +59,20 @@ def update_workout_view(request:HttpRequest, workout_id:int):
     exercises = Exercise.objects.all()
 
     if request.method == "POST":
-        if request.POST["restTime"].isdigit():
-            workout.restTime = int(request.POST["restTime"])
-            workout.note = request.POST.get("note", "").strip()
-            updated_exercise = Exercise.objects.get(pk=request['exercise'])
-            workout.exercise = updated_exercise
-            messages.success(request, "Updated Workout Successfuly!", "alert-success")
-            return redirect("routines:routine_detail_view", routine_id=workout.routine.id)
-        else:
-            messages.error(request, "Rest Time must be digit number. Please correct the errors.", "alert-danger")
+        if request.POST["restTime"]:
+            if request.POST["restTime"].isdigit():
+                workout.restTime = int(request.POST["restTime"])
+                workout.note = request.POST.get("note", "").strip()
+                updated_exercise = Exercise.objects.get(pk=int(request.POST['exercise']))
+                workout.exercise = updated_exercise
+                workout.save()
+                messages.success(request, "Updated Workout Successfuly!", "alert-success")
+                return redirect("routines:routine_detail_view", routine_id=workout.routine.id)
+            else:
+                messages.error(request, "Rest Time must be digit number. Please correct the errors.", "alert-danger")
             
-    else:
-        messages.error(request, "There are no data received. Please correct the errors.", "alert-danger")
+        else:
+            messages.error(request, "There are no data received. Please correct the errors.", "alert-danger")
 
     return render(
         request,"workouts/update_workout.html",
@@ -80,19 +82,7 @@ def update_workout_view(request:HttpRequest, workout_id:int):
             'exercises': exercises,
         },
     )
-    # workout = Workout.objects.get(pk=workout_id)
-    
-    # if request.method == "POST":
-    #     workout_form = WorkoutForm(instance=workout, data=request.POST)
-    #     if workout_form.is_valid():
-    #         workout_form.save()
-    #         messages.success(request, "Updated Workout Successfuly!", "alert-success")
-    #         return redirect("main:home_view")
-    #     else:
-    #         print("not valid form", workout_form.errors)
-    #         messages.error(request, "Couldn't Update Workout!", "alert-danger")
-    
-    # return render(request, "workouts/update_workout.html")
+
 
 def delete_workout_view(request:HttpRequest,  workout_id:int):
     try:
@@ -121,7 +111,6 @@ def new_set_view(request:HttpRequest, workout_id:int):
                     new_set = Set(weight=weight, repetition=int(request.POST['repetition']), workout=workout)
                     new_set.save()
                     messages.success(request, "Added Set Successfuly!", "alert-success")
-                    return redirect("routines:routine_detail_view", routine_id=workout.routine.id)
             except ValueError:
                 messages.error(request, "Weight must be a valid number.", "alert-danger")
         else:
@@ -130,7 +119,8 @@ def new_set_view(request:HttpRequest, workout_id:int):
     else:
         messages.error(request, "Couldn't Add Set!. Please correct the errors.", "alert-danger")
     
-    return render(request, "sets/new_set.html")
+    return redirect("routines:routine_detail_view", routine_id=workout.routine.id)
+
 
 
 
@@ -171,20 +161,6 @@ def delete_set_view(request:HttpRequest, set_id:int):
     
     return redirect("routines:routine_detail_view", routine_id=set.workout.routine.id)
 
-
-
-def search_workouts_view(request:HttpRequest):
-    if "search" in request.GET and len(request.GET["search"]) >= 3:
-        workouts = Workout.objects.filter(exercise__name__contains=request.GET.get("search", "").strip())
-    
-    else:
-        if request.GET.get("search", "").strip():
-            messages.error(request, "Search query must be at least 3 characters long.", "alert-danger")
-        else:
-            messages.error(request, "Please enter a search term.", "alert-danger")
-        workouts = []
-    
-    return render(request, "workouts/search_workout.html", {'workouts': workouts})
 
 
 def done_set_view(request: HttpRequest, set_id:int):

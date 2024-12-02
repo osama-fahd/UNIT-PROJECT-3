@@ -54,7 +54,7 @@
                       </li>
                     {% endif %}
 
-                    {% if request.user.is_authenticated %}
+                    {% if request.user.is_authenticated or request.user.is_staff %}
                       <li class="nav-item">
                         <a {% if request.path == all_routines %} class="nav-link text-warning bg-dark rounded-5 ps-sm-5 ps-lg-2" {% else %} class="nav-link" {% endif %} href="{{all_routines}}">Your All Routines</a>
                       </li>

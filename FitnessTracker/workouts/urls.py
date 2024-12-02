@@ -14,5 +14,4 @@ urlpatterns = [
     path("sets/delete/<set_id>/", views.delete_set_view, name="delete_set_view"),
     path("checks/add/<set_id>/", views.done_set_view, name="done_set_view"),
     path("checks/finsh/<workout_id>/", views.finish_workout_view, name="finish_workout_view"),
-    path("search/workouts/", views.search_workouts_view, name="search_workouts_view"),
 ]
