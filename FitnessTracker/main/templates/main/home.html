@@ -6,17 +6,19 @@
 
 {% load static %}
 
-<div class="d-flex flex-column justify-content-center align-items-center justify-content-lg-start align-items-lg-start">
-   <h1 class="align-self-center align-self-lg-start">
-        Your Latest Routines
-    </h1> 
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="d-flex flex-column align-items-center">
+        <h1>
+             Your Latest Routines
+         </h1> 
+    </div>
+    
+    
+    {% include 'routines/routine_list.html' %}
 </div>
+    
 
-
-
-
-
-<!-- <div class="line mt-5"></div> -->
+<div class="line mt-5"></div>
 
 
 {% endblock %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest, HttpResponse
 
 from .forms import WorkoutForm
-from .models import Workout, Set
+from .models import Workout, Set, Check
 
 from routines.models import Routine
 
@@ -147,6 +147,27 @@ def search_workouts_view(request:HttpRequest):
         workouts = []
     
     return render(request, "workouts/search_workout.html", {'workouts': workouts,})
+
+
+def checked_set_view(request: HttpRequest, set_id):
+    try:
+        workout_set = Set.objects.get(pk=set_id)
+
+        check = Check.objects.filter(set_relation=workout_set).first() 
+        if not check:
+            new_check = Check(set_relation=workout_set)
+            new_check.save()
+            messages.success(request, "Set Done!", "alert-success")
+        else:
+            check.delete()
+
+    except Set.DoesNotExist:
+        messages.error(request, "Set not found.")
+    except Exception as e:
+        messages.error(request, "An error occurred: " + str(e))
+
+    return redirect("routines:routine_detail_view", routine_id=workout_set.workout.routine.id)
+
 
     
     

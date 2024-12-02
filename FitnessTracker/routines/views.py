@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from .forms import RoutineForm
 from .models import Routine
 
-from workouts.models import Workout, Set
+from workouts.models import Workout, Set, Check
 
 from exercises.models import Exercise
 
@@ -22,13 +22,13 @@ def all_routines_view(request:HttpRequest):
     
     routines = Routine.objects.all()
         
-    # page_number = request.GET.get("page", 1)
-    # paginator = Paginator(routines, 4)
-    # routines_page = paginator.get_page(page_number)
+    page_number = request.GET.get("page", 1)
+    paginator = Paginator(routines, 4)
+    routines_page = paginator.get_page(page_number)
     
     return render(request, "routines/all_routines.html", {
-                                                            'routines': routines, 
-                                                            # 'routines': routines_page,
+                                                            # 'routines': routines, 
+                                                            'routines': routines_page,
                                                             # 'workouts': workouts,
                                                             # 'exercises': exercises,
                                                         })
@@ -36,7 +36,9 @@ def all_routines_view(request:HttpRequest):
 def routine_detail_view(request:HttpRequest, routine_id:int):
     routine = Routine.objects.get(pk=routine_id)
     
-    return render(request, "routines/routine_details.html", {'routine': routine})
+    checks = Check.objects.all()
+    
+    return render(request, "routines/routine_details.html", {'routine': routine, 'checks': checks})
 
 
 def new_routine_view(request:HttpRequest):

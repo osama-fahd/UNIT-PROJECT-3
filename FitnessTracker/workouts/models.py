@@ -13,6 +13,7 @@ class Workout(models.Model):
     def __str__(self) -> str:
         return f'{self.routine.name}-{self.exercise.name}'
 
+
 class Set(models.Model):
     weight = models.FloatField()
     repetition = models.PositiveIntegerField()
@@ -21,3 +22,9 @@ class Set(models.Model):
 
     def __str__(self) -> str:
         return f'{self.workout.routine.name}-{self.workout.exercise.name} set: {self.id}'
+     
+     
+class Check(models.Model):
+
+    set = models.OneToOneField(Set, on_delete=models.CASCADE, related_name='check')
+    created_at = models.DateTimeField(auto_now_add=True)
