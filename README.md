@@ -39,7 +39,7 @@ The **Fitness Tracker** is a Django-based web application designed to help gym e
 
 
 ## Additional Features
-- **Punlic Routines**: A  list of routines that all users can explore and benefit from them.
+- **Public Routines**: A  list of routines that all users can explore and benefit from them.
 
 
 ## Use Case
