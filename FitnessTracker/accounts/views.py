@@ -8,7 +8,6 @@ from django.contrib import messages
 
 
 def sign_up(request: HttpRequest):
-
     if request.method == "POST":
 
         try:
@@ -18,16 +17,13 @@ def sign_up(request: HttpRequest):
             return redirect("accounts:sign_in")
         except Exception as e:
             print(e)
-    
 
     return render(request, "accounts/signup.html")
 
 
 
 def sign_in(request:HttpRequest):
-
     if request.method == "POST":
-
         user = authenticate(request, username=request.POST["username"], password=request.POST["password"])
 
         if user:
@@ -37,8 +33,8 @@ def sign_in(request:HttpRequest):
         else:
             messages.error(request, "Please try again", "alert-danger")
 
-
     return render(request, "accounts/signin.html")
+
 
 
 def log_out(request: HttpRequest):

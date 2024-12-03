@@ -9,10 +9,9 @@
 <div class="d-flex flex-column justify-content-center align-items-center">
     <div class="d-flex flex-column align-items-center">
         <h1>
-             Your All Routines
+            All {{request.user.first_name}} Routines
          </h1> 
     </div>
-    
     
     {% include 'routines/routines_list.html' %}
 </div>

@@ -23,7 +23,6 @@ def all_exercises_view(request:HttpRequest):
     
     return render(request, "exercises/all_exercises.html", {'exercises': exercises_page, 'workout_categories': workout_categories})
 
-
 def exercise_detail_view(request:HttpRequest, exercise_id:int):
     exercise = Exercise.objects.get(pk=exercise_id)
     
@@ -31,6 +30,10 @@ def exercise_detail_view(request:HttpRequest, exercise_id:int):
 
 
 def new_exercise_view(request:HttpRequest):
+    if not request.user.is_staff:
+        messages.success(request, "Only staff can add exercises!", "alert-warning")
+        return redirect("main:home_view")
+    
     exercise_form = ExerciseForm()
     
     if request.method == "POST":
@@ -47,6 +50,10 @@ def new_exercise_view(request:HttpRequest):
 
 
 def update_exercise_view(request:HttpRequest, exercise_id:int):
+    if not request.user.is_staff:
+        messages.success(request, "Only staff can update exercises!", "alert-warning")
+        return redirect("main:home_view")
+    
     exercise = Exercise.objects.get(pk=exercise_id)
     
     if request.method == "POST":
@@ -62,6 +69,10 @@ def update_exercise_view(request:HttpRequest, exercise_id:int):
     return render(request, "exercises/update_exercise.html")
 
 def delete_exercise_view(request:HttpRequest,  exercise_id:int):
+    if not request.user.is_staff:
+        messages.success(request, "Only staff can delete exercises!", "alert-warning")
+        return redirect("main:home_view")
+    
     try:
         exercise = Exercise.objects.get(pk=exercise_id)
         exercise.delete()

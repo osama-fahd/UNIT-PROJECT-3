@@ -13,7 +13,6 @@ from django.contrib import messages
 
 def new_workout_view(request: HttpRequest, routine_id: int):
     routine = Routine.objects.get(pk=routine_id)
-    exercises = Exercise.objects.all()
     
     workout_form = WorkoutForm()
 
@@ -35,41 +34,65 @@ def new_workout_view(request: HttpRequest, routine_id: int):
                             else:
                                 new_set = Set(weight=weight, repetition=int(request.POST['repetition']), workout=workout)
                                 new_set.save()
+                                messages.success(request, "Workout added successfully!", "alert-success")
+                                
                         except ValueError:
                             messages.error(request, "Weight must be a valid number.", "alert-danger")
-
-                
-                messages.success(request, "Workout added successfully!", "alert-success")
-                return redirect("routines:routine_detail_view", routine_id=routine_id)
+                    else:
+                        messages.error(request, "Repetition must be digit number. Please correct the errors.", "alert-danger")
+                else:
+                    messages.error(request, "Repetition must be digit number. Please correct the errors.", "alert-danger")
             else:
-                messages.error(request, "Couldn't save the workout. Please correct the errors.", "alert-danger")
-            
+                messages.error(request, "Rest Time must be digit number. Please correct the errors.", "alert-danger")
         else:
-            messages.error(request, "Couldn't save the workout. Please correct the errors.", "alert-danger")
+            messages.error(request, "There is an error in the form. Please correct the errors.", "alert-danger")
+            
+    else:
+        messages.error(request, "There are no data received. Please correct the errors.", "alert-danger")
 
-    return render(
-        request,"workouts/new_workout.html",
-        {
-            "routine": routine,
-            'exercises': exercises,
-        },
-    )
+    return redirect("routines:routine_detail_view", routine_id=routine_id)
 
 
 def update_workout_view(request:HttpRequest, workout_id:int):
     workout = Workout.objects.get(pk=workout_id)
-    
+    routine = Routine.objects.get(pk=workout.routine.id)
+    exercises = Exercise.objects.all()
+
     if request.method == "POST":
-        workout_form = WorkoutForm(instance=workout, data=request.POST)
-        if workout_form.is_valid():
-            workout_form.save()
+        if request.POST["restTime"].isdigit():
+            workout.restTime = int(request.POST["restTime"])
+            workout.note = request.POST.get("note", "").strip()
+            updated_exercise = Exercise.objects.get(pk=request['exercise'])
+            workout.exercise = updated_exercise
             messages.success(request, "Updated Workout Successfuly!", "alert-success")
-            return redirect("main:home_view")
+            return redirect("routines:routine_detail_view", routine_id=workout.routine.id)
         else:
-            print("not valid form", workout_form.errors)
-            messages.error(request, "Couldn't Update Workout!", "alert-danger")
+            messages.error(request, "Rest Time must be digit number. Please correct the errors.", "alert-danger")
+            
+    else:
+        messages.error(request, "There are no data received. Please correct the errors.", "alert-danger")
+
+    return render(
+        request,"workouts/update_workout.html",
+        {
+            "routine": routine,
+            'workout':workout,
+            'exercises': exercises,
+        },
+    )
+    # workout = Workout.objects.get(pk=workout_id)
     
-    return render(request, "workouts/update_workout.html")
+    # if request.method == "POST":
+    #     workout_form = WorkoutForm(instance=workout, data=request.POST)
+    #     if workout_form.is_valid():
+    #         workout_form.save()
+    #         messages.success(request, "Updated Workout Successfuly!", "alert-success")
+    #         return redirect("main:home_view")
+    #     else:
+    #         print("not valid form", workout_form.errors)
+    #         messages.error(request, "Couldn't Update Workout!", "alert-danger")
+    
+    # return render(request, "workouts/update_workout.html")
 
 def delete_workout_view(request:HttpRequest,  workout_id:int):
     try:

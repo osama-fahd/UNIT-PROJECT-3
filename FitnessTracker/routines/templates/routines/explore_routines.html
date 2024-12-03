@@ -2,7 +2,6 @@
 <div class="container">
     <div class="row mt-2 row-cols-1 row-cols-sm-1 row-cols-lg-2 g-5">
         {% if request.user.is_authenticated %}
-            {% if request.user == user %}
                 {% for routine in routines %}
                     <div class="col">
                         <div class="d-flex flex-column justify-content-start align-items-start h-100 p-4 gap-2 routine_card">
@@ -21,6 +20,8 @@
                                     </li>
                                 {% endfor %}
                             </ol>
+                            <div class="line"></div>
+                            <h3>By {{routine.user.first_name}} {{routine.user.last_name}}</h3>
                         </div>
                     </div>
                 {% empty %}
@@ -35,7 +36,6 @@
                     </div>
                 </div>
                 {% endfor %}
-            {% endif %}
         {% endif %}
     </div>
   </div>

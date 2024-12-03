@@ -12,10 +12,10 @@ from django.contrib import messages
 
 
 def home_view(request:HttpRequest):
-    routines = Routine.objects.all()[0:3]
+    routines = Routine.objects.filter(is_public=True)
     exercises = Exercise.objects.all()[0:4]
 
-    return render(request, 'main/home.html', {'routines': routines, 'exercises': exercises})
+    return render(request, 'main/home.html', {'routines': routines, 'exercises': exercises, 'user': request.user})
 
 def contact_view(request:HttpRequest):
     contact_form = ContactForm()

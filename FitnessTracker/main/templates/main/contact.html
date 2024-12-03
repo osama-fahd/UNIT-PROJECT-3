@@ -6,13 +6,15 @@
 
 {% load static %}
 
-<div class="d-flex flex-column justify-content-center align-items-center w-100">
+<div class="mt-5 d-flex flex-column justify-content-center align-items-center w-100">
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-12 col-sm-10 col-lg-7">
-                <div class="d-flex flex-column justify-content-start align-items-start mb-3">
-                    <h2 class="">Can't Wait To Here From YOU!</h2>
+            <div class="col-12 col-sm-10 col-lg-8 transparent-bg">
+                <div class="d-flex flex-column justify-content-start align-items-start">
+                    <h2 class="m-0">Can't Wait To Here From YOU!</h2>
                 </div>
+                <div class="line mb-4"></div>
+
                 <form class="d-flex flex-column gap-4" action="{% url 'main:contact_view' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="d-flex flex-row justify-content-between gap-2" style="width: 100%;">
