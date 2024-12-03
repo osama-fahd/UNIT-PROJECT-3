@@ -1,4 +1,4 @@
-# Fitness Tracker for Gym and Riders
+# Fitness Tracker for Gym
 
 ## Overview
 The **Fitness Tracker** is a Django-based web application designed to help gym enthusiasts and riders log and manage their fitness routines. This system simplifies workout tracking by offering features for creating reusable workout templates, logging workout sessions, and organizing exercises with detailed instructions.
