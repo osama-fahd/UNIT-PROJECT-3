@@ -1,135 +1,47 @@
-# UNIT-PROJECT-3
+# Fitness Tracker for Gym
 
-## Create a Project of your own choosing
-
-Base on what you’ve learned until now , create a project of your choosing. Impress us with your creativity and execution.
-
-
-## Minimum Requirements
-- Use Django.
-- Use Templates & Template Inheritance.
-- Use static, media & dynamic urls as needed.
-- Organize your project in apps as needed.
-- Use models to represent you data.
-- Use a CSS library to style your website.
-- User Authentication & Authorization (register, login, logout, Limit access to some pages using permissions , etc.)
-- Use naming conventions & best practices.
-- Strive to make the user journey intuitive and complete.
+## Overview
+The **Fitness Tracker** is a Django-based web application designed to help gym enthusiasts and riders log and manage their fitness routines. This system simplifies workout tracking by offering features for creating reusable workout templates, logging workout sessions, and organizing exercises with detailed instructions.
 
 
+## Key Features
 
-## Example Projects :
+### 1. Routine Management
+- **Routine**: A reusable workout template that users can create for workouts they plan to perform repeatedly.  
+- Routines are a framework for organizing related workouts and streamlining future workout sessions.
 
-
-1. **Task Management System:**
-- **Overview:** Create a platform for managing tasks and projects within a team or organization.
-- **Features:**
-- User authentication and role-based access control.
-- Task creation, assignment, and tracking.
-- Project management with milestones.
-- File uploads and comments on tasks.
-- Notification system for task updates.
-
-## Use python-dotenv to save your sensitive data.
-- https://pypi.org/project/python-dotenv/
+### 2. **Workout Tracking**
+- **Workout**: Represents a specific instance of exercise activity that a user is currently performing.  
+- Each workout can consist of multiple sets, and each set includes:
+  - **Weight**: The weight to be used for the exercise.
+  - **Repetition**: The number of times the user will perform the exercise with the specified weight.  
+- Workouts are based on **Exercises**, such as Chest Press Machine, Triceps Pushdown Machine, or Lat Pulldown.  
+- Each exercise comes with detailed instructions to guide users on the correct technique and form.
 
 
-## Use a CDN or cloud storage provider to sore your large static files (videos, images, etc.), such as:
-- https://firebase.google.com/docs/storage
+## User Roles and Permissions
 
-## Use Git & Github to manage and track changes in your project.
-- At lease commit and sync the changes once at the end of everyday.
+### 1. **Staff Users**
+- Manage the exercise database:
+  - Add, update, and delete exercises.
+  - Provide detailed instructions steps for each exercise.
 
-## Edit the README.md file to include (include the info at the top):
-- Project Name
-- Project Description
-- Features list.
-
-
-**Online Learning Platform:**
-
-- **Overview:** Develop a platform for online courses, quizzes, and educational resources.
-- **Features:**
-- User registration and profile management.
-- Course creation and enrollment.
-- Quiz and assessment functionalities.
-- Progress tracking and certificates.
+### 2. **Regular Users**
+- **Routine Management**:
+  - Create, update, and delete routines.
+  - View their personal routines on a dedicated page, accessible only to the user.  
+- **Workout Management**:
+  - Add workouts to routines.
+  - Edit or update workout details, including sets, weights, and repetitions.
+- **Exercise Access**:
+  - Browse the available exercises on a public page.
+  - View detailed instructions for exercises but it requires user registration.
 
 
+## Additional Features
+- **Public Routines**: A  list of routines that all users can explore and benefit from them.
 
 
-**Crowdfunding Platform:**
+## Use Case
+- **For Gym Enthusiasts**: Track weightlifting sessions, create routines, and follow guided instructions for exercises.
 
-- **Overview:** Build a crowdfunding website where users can create campaigns and seek financial support for their projects.
-- **Features:**
-    - User profiles with project history.
-    - Campaign creation and customization.
-    - Payment integration for contributions.
-    - Progress tracking and updates.
-
-**Job Board and Recruitment System:**
-
-- **Overview:** Develop a platform for job seekers and employers to connect.
-- **Features:**
-    - User profiles with resumes.
-    - Job posting and application functionalities.
-    - Search and filter options for jobs.
-    - Employer dashboards for managing postings.
-
-
-**Inventory Management System:**
-
-- **Overview:** Build a system for tracking and managing inventory for businesses.
-- **Features:**
-    - User authentication with roles (e.g., admin, staff).
-    - Product catalog with stock levels.
-    - Order processing and tracking.
-    - Reporting and analytics.
-
-
-**Recipe Sharing Platform:**
-
-- **Overview:** Create a platform where users can share and discover recipes.
-- **Features:**
-    - User accounts with saved recipes.
-    - Recipe creation and editing.
-    - Search and categorization of recipes.
-    - User ratings and reviews.
-      
-## Resources:
-
-**Free high quality images :**
-
-- https://www.pexels.com/
-- https://unsplash.com
-
-**Free sounds website:**
-
-- https://mixkit.co/
-
-**Free stock videos:**
-
-- https://pixabay.com/videos/
-
-**Free Fonts:**
-
-- https://fonts.google.com
-
-**Free Icons**
-
-- https://fonts.google.com/icons
-- https://icons.getbootstrap.com/
-
-**CSS Library:**
-
-- https://getbootstrap.com/
-- https://get.foundation/index.html
-
-**CSS Animation libraries:**
-
-- https://animate.style
-- https://www.minimamente.com/project/magic/
-
-
-
- 
