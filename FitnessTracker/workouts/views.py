@@ -114,7 +114,7 @@ def new_set_view(request:HttpRequest, workout_id:int):
             except ValueError:
                 messages.error(request, "Weight must be a valid number.", "alert-danger")
         else:
-            messages.error(request, "Couldn't Add Set! Please correct the errors.", "alert-danger")
+            messages.error(request, "Couldn't Add Set! Please insert correct numbers.", "alert-danger")
             
     else:
         messages.error(request, "Couldn't Add Set!. Please correct the errors.", "alert-danger")
@@ -138,7 +138,7 @@ def update_set_view(request, set_id):
                     set_obj.weight = weight
                     set_obj.repetition = request.POST['repetition']
                     set_obj.save()
-                    messages.success(request, f"{set_obj.workout.exercise.name} set {set_obj.id} updated successfully!", "alert-success")
+                    messages.success(request, "The set updated successfully!", "alert-success")
             except ValueError:
                 messages.error(request, "Weight must be a valid number.", "alert-danger")
         else:

@@ -21,7 +21,7 @@ main {
     background-image: url('/static/images/gym-equipment.jpg');
     background-size: cover;
     background-position:center;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
 }
 
 main {
@@ -61,7 +61,7 @@ footer a{
     background-color: rgba(102, 102, 102, 0.3); 
     backdrop-filter: blur(6px); 
     box-shadow: 0 4px 20px rgba(255, 255, 255, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease-in-out, border 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out, background-color 0.3 ease-in-out;
+    transition: transform 0.5s ease-in-out, box-shadow 0.5s ease-in-out, border 0.5s ease-in-out, backdrop-filter 0.5s ease-in-out, background-color 0.5 ease-in-out;
 }
 
 .routine_card:hover {
@@ -83,7 +83,7 @@ footer a{
 .routine_card h2{
     font-size: 2.5rem;
     color: #ffbb00;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.3s ease;
 }
 
 .routine_card h2:hover {
@@ -109,6 +109,39 @@ footer a{
 .exercise_card:hover {
     background-color: rgba(102, 102, 102, 0.3); 
     backdrop-filter: blur(2px); 
+}
+
+.hero {
+    position: relative;
+    background-image: url('/static/images/3d-gym-equipment.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    padding-left: 2rem;
+    /* border-radius: 1rem; */
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1; 
+    /* border-radius: 1rem; */
+}
+
+.right-hero {
+    z-index: 2;
+}
+
+.left-hero{
+    color: #ffde82;
+    z-index: 2;
 }
 
 @media (max-width: 992px) {

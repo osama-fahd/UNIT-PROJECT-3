@@ -96,6 +96,7 @@
 
 
     <main class="p-5">
+
       {% if messages %}
         {% for message in messages %}
           <div class="alert {{message.tags}} alert-dismissible fade show" role="alert">
@@ -105,9 +106,9 @@
         {% endfor %}
       {% endif %}
 
-    {% block content %}
+      {% block content %}
 
-    {% endblock %}
+      {% endblock %}
     </main>
     
     <footer class="p-4">
