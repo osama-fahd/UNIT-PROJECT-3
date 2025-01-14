@@ -83,6 +83,31 @@
                       </li>
                     {% endif %}
 
+                    {% if request.user.is_staff %}
+                    <li class="nav-item">
+                      <a class="nav-link" >
+                        <h5 class="text-dark">
+                          Hi {{request.user.first_name}}!
+                        </h5>
+                      </a> 
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" >
+                        <h5 class="text-secondary">
+                          Logged in as a staff member
+                        </h5>
+                      </a> 
+                    </li>
+                    {% elif request.user.is_authenticated  %}
+                    <li class="nav-item">
+                      <a class="nav-link" >
+                        <h5 class="text-dark">
+                          Hi {{request.user.first_name}}!
+                        </h5>
+                      </a> 
+                    </li>
+                    {% endif %}
+
                   </ul>
                   <form class="d-flex" role="search" method="get" action="">
                     <input  class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" value="{{request.GET.search}}" required minlength="3">

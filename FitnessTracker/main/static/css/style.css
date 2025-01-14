@@ -130,13 +130,17 @@ footer a{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.466); 
     z-index: 1; 
     /* border-radius: 1rem; */
 }
 
 .right-hero {
     z-index: 2;
+}
+
+.right-hero h2 {
+    font-size: 3rem;
 }
 
 .left-hero{

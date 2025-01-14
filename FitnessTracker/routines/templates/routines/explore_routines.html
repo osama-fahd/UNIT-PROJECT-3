@@ -13,7 +13,7 @@
                             </div>
                             <div class="line"></div>
                             <h3 class="">Exercises</h3>
-                            <ol class="row row-cols-1 row-cols-sm-2 row-cols-md-3 justify-content-between w-100">
+                            <ol class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-2  justify-content-between w-100">
                                 {% for workout in routine.workout_set.all %}
                                     <li class="col-12">
                                         <p>{{workout.exercise.name}}</p>
@@ -22,7 +22,7 @@
                             </ol>
                             <div class="line"></div>
                          
-                                <h3>By {{routine.user.first_name}} {{routine.user.last_name}}</h3>
+                                <h3>By {{routine.user.first_name}}</h3>
               
                         </div>
                     </div>
