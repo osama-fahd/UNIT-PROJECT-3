@@ -1,6 +1,6 @@
 body {
 
-    background-color: #ffce47cb;
+    background-color: #43FFAE;
 }
 
 a {
@@ -9,7 +9,7 @@ a {
 
 h1 {
     font-size: 4.5rem;
-    color: #ffbb00;
+    color: #43FFAE;
 }
 
 h1, h2 {
@@ -18,22 +18,22 @@ h1, h2 {
 
 main {
     min-height: 100vh;
-    background-image: url('/static/images/gym-equipment.jpg');
+    background-image: url('/static/images/Cover.png');
     background-size: cover;
     background-position:center;
     background-repeat: repeat-y;
 }
 
 main {
-    color: #fcd15c;
+    color: #43FFAE;
 }
 
 main a{
-    color: #fcd15c;
+    color: #43FFAE;
 }
 
 footer a{
-    color: black;
+    color: #002093;
 }
 
 
@@ -113,7 +113,7 @@ footer a{
 
 .hero {
     position: relative;
-    background-image: url('/static/images/3d-gym-equipment.jpg');
+    background-image: url('/static/images/Horizontal_White Text.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -130,7 +130,7 @@ footer a{
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.466); 
+    /* background-color: rgba(0, 0, 0, 0.466);  */
     z-index: 1; 
     /* border-radius: 1rem; */
 }
